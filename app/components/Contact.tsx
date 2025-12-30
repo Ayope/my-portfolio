@@ -14,7 +14,7 @@ const CARDS: Card[] = [
     id: "linkedin",
     title: "LinkedIn",
     subtitle: "Connect and view my profile",
-    href: "https://www.linkedin.com", // replace with your profile URL
+    href: "https://www.linkedin.com/in/ayoub-el-ayouk/",
     icon: (
       <svg aria-hidden="true" className="w-6 h-6" viewBox="0 0 24 24" fill="none">
         <path d="M16 8a6 6 0 016 6v6h-4v-6a2 2 0 00-4 0v6h-4v-12h4v2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -27,7 +27,7 @@ const CARDS: Card[] = [
     id: "email",
     title: "Email",
     subtitle: "Send me a message",
-    href: "mailto:ayoub@example.com", // replace with your email
+    href: "mailto:ayoubelayouk1@gmail.com", // replace with your email
     icon: (
       <svg aria-hidden="true" className="w-6 h-6" viewBox="0 0 24 24" fill="none">
         <path d="M3 8.5v7a2 2 0 002 2h14a2 2 0 002-2v-7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -41,7 +41,7 @@ export default function Contact() {
   return (
     <section id="contact" className="scroll-mt-20 md:scroll-mt-24 px-4 md:px-10 mt-20">
       <h2 className="text-center text-3xl font-bold mb-2">CONTACT</h2>
-      <p className="text-center text-green-400 mb-8">I am here for your project!</p>
+      <p className="text-center text-green-400 mb-8">Feel free to contact me!</p>
 
       <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
         {CARDS.map((card) => (
@@ -50,7 +50,7 @@ export default function Contact() {
             href={card.href}
             target={card.href.startsWith("mailto:") ? "_self" : "_blank"}
             rel={card.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-            className="relative group block bg-[#0f1114] border border-[#1a1a1f] rounded-xl p-6 overflow-hidden transition-transform transform hover:scale-105 hover:shadow-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-green-400"
+            className="relative group block bg-[#0f1114] border border-[#1a1a1f] rounded-xl p-6 overflow-hidden transition-transform transform hover:scale-105 hover:shadow-lg cursor-pointer focus:outline-none"
             aria-label={`${card.title} — ${card.subtitle}`}
           >
             <div className="flex items-start gap-4">

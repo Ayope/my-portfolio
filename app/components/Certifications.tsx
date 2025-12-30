@@ -39,8 +39,8 @@ export default function Certifications({ certFiles }: Props) {
     <section id="certifications" className="scroll-mt-20 md:scroll-mt-24 px-10 mt-20">
       <h2 className="text-center text-3xl font-bold">CERTIFICATIONS</h2>
       <div className="text-center mb-10">
-        <p className="text-sm text-green-300 tracking-wide">
-          PS: Click any certificate to view it
+        <p className="text-sm text-green-400 tracking-wide">
+          Click any certificate to view it !
         </p>
       </div>
 

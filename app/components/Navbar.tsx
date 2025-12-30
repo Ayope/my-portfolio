@@ -40,7 +40,7 @@ export default function Navbar() {
     { label: "Home", href: "#home" },
     { label: "Certifications", href: "#certifications" },
     { label: "Experience", href: "#experience" },
-    { label: "Blog", href: "#blog" },
+    // { label: "Blog", href: "#blog" },
     { label: "Contact", href: "#contact" },
   ];
 
@@ -82,11 +82,12 @@ export default function Navbar() {
     <nav
       ref={navRef}
       className={`sticky top-0 z-50 transition-colors duration-300 ${
-        isScrolled ? "bg-[#0e0e11]/95 shadow-md backdrop-blur-sm" : "bg-transparent"
+        isScrolled
+          ? "md:bg-[#0e0e11]/95 md:shadow-md md:backdrop-blur-sm bg-[#0e0e11] shadow-md"
+          : "md:bg-transparent bg-[#0e0e11] md:shadow-none shadow-none"
       }`}
     >
-      <div className="w-full py-4 px-4 md:px-10 flex justify-between items-center">
-        <h1 className="text-2xl font-bold tracking-wide">Ayoub El Ayouk</h1>
+      <div className="w-full py-5 px-4 md:px-10 flex justify-end items-center">
 
         {/* Desktop menu */}
         <ul className="hidden md:flex gap-8 text-sm">

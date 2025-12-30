@@ -4,47 +4,89 @@ type ExperienceItem = {
   dates: string;
   title: string;
   company: string;
+  companyLink: string;
   location: string;
   description: string;
+  startDate: Date;
+  endDate?: Date;
 };
+
+// Helper: calculate duration between two dates
+function calculateDuration(start: Date, end: Date = new Date()): string {
+  let months = (end.getFullYear() - start.getFullYear()) * 12;
+  months += end.getMonth() - start.getMonth();
+
+  const years = Math.floor(months / 12);
+  const remainingMonths = months % 12;
+
+  if (years === 0) {
+    return `${remainingMonths} month${remainingMonths !== 1 ? "s" : ""}`;
+  }
+  if (remainingMonths === 0) {
+    return `${years} year${years !== 1 ? "s" : ""}`;
+  }
+  return `${years} year${years !== 1 ? "s" : ""} ${remainingMonths} month${remainingMonths !== 1 ? "s" : ""}`;
+}
+
+// Helper: format date range with duration
+function formatDateRange(start: Date, end?: Date): string {
+  const options: Intl.DateTimeFormatOptions = { year: "numeric", month: "short" };
+  const startStr = start.toLocaleDateString("en-US", options);
+  const endStr = end ? end.toLocaleDateString("en-US", options) : "Today";
+  const duration = calculateDuration(start, end);
+  return `${startStr} - ${endStr} · ${duration}`;
+}
 
 const EXPERIENCES: ExperienceItem[] = [
   {
-    dates: "févr. 2024 - aujourd'hui",
+    dates: formatDateRange(new Date(2024, 1, 1)), // Feb 2024 - today
     title: "ServiceNow Technical Consultant",
     company: "UX4MATION",
-    location: "Maroc · Hybride",
+    companyLink: "https://www.linkedin.com/company/ux4mation/",
+    location: "Morocco · Hybrid",
     description:
-      "Design and implement ServiceNow workflows, scalable applications, and integrations to improve client and employee experiences. Areas: ServiceNow Administration, ITSM, CSM, and App Development.",
+      "Design and implement custom ServiceNow workflows, scalable applications, and seamless integrations to improve operational efficiency and customer/employee experiences. Key areas: ServiceNow Administration, ITSM, CSM, and Application Development.",
+    startDate: new Date(2024, 1, 1),
   },
   {
-    dates: "sept. 2022 - mars 2024",
-    title: "Apprenant développeur web et mobile",
+    dates: formatDateRange(new Date(2022, 8, 1), new Date(2024, 2, 31)), // Sept 2022 - Mar 2024
+    title: "Web & Mobile Developer Apprentice",
     company: "YouCode Maroc",
-    location: "Youssoufia, Marrakech-Safi · Sur site",
+    companyLink: "https://www.linkedin.com/company/youcode-maroc/",
+    location: "Youssoufia, Marrakech-Safi · On-site",
     description:
-      "Full-stack & mobile development training — built practical projects, worked with Scrum, and focused on frontend/backend integration and responsive UI.",
+      "Full-stack and mobile development training with hands-on projects. Worked with Scrum methodology, focused on frontend/backend integration, responsive UI design, and collaborative development practices.",
+    startDate: new Date(2022, 8, 1),
+    endDate: new Date(2024, 2, 31),
   },
   {
-    dates: "mai 2023 - juin 2023",
-    title: "Développeur Full Stack (Stage)",
+    dates: formatDateRange(new Date(2023, 4, 1), new Date(2023, 5, 30)), // May 2023 - Jun 2023
+    title: "Full Stack Developer",
     company: "FOODEALS",
-    location: "Fès, Fès-Meknès · Sur site",
+    companyLink: "https://www.linkedin.com/company/foodeals/",
+    location: "Fès, Fès-Meknès · On-site",
     description:
-      "Contributed to a web app reducing food waste by connecting restaurants and supermarkets with citizens. Implemented features across the stack and improved UI/UX.",
+      "Contributed to a web application reducing food waste by connecting restaurants and supermarkets with citizens. Implemented features across the full stack, improved user experience, and collaborated with the team on product development.",
+    startDate: new Date(2023, 4, 1),
+    endDate: new Date(2023, 5, 30),
   },
 ];
 
 export default function Experience() {
   return (
     <section id="experience" className="scroll-mt-20 md:scroll-mt-24 px-10 mt-20">
-      <h2 className="text-center text-3xl font-bold mb-10">EXPERIENCE</h2>
+      <div className="text-center mb-10">
+        <h2 className="text-3xl font-bold">EXPERIENCE</h2>
+        <p className="text-sm text-green-400 tracking-wide">
+          Here is what I experienced !
+        </p>
+      </div>
 
       <div className="max-w-6xl mx-auto space-y-6">
         {EXPERIENCES.map((exp, idx) => (
           <div
             key={idx}
-            className="flex flex-col gap-4 py-4 border-b border-[#1a1a1f] last:border-b-0"
+            className="flex flex-col gap-4 py-4 border-b border-[#8f8f92] last:border-b-0"
           >
             {/* top row: title (left) and dates (right) */}
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
@@ -57,9 +99,18 @@ export default function Experience() {
               </div>
             </div>
 
-            {/* company/location/mode under the title */}
+            {/* company/location/mode under the title - company is now a link */}
             <div className="text-sm text-gray-400">
-              {exp.company} · {exp.location}
+              <a
+                href={exp.companyLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-gray-200 max-sm:text-gray-200 transition-colors cursor-pointer"
+              >
+                {exp.company}
+              </a>
+              {" · "}
+              {exp.location}
             </div>
 
             {/* description */}
