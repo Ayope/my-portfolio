@@ -1,6 +1,5 @@
 'use client';
 import React, { useRef } from "react";
-import Image from "next/image";
 
 export default function Hero() {
   const navRef = useRef<HTMLElement | null>(null); // optional, for nav height
