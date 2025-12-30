@@ -13,11 +13,13 @@ type ExperienceItem = {
 
 // Helper: calculate duration between two dates
 function calculateDuration(start: Date, end: Date = new Date()): string {
-  let months = (end.getFullYear() - start.getFullYear()) * 12;
-  months += end.getMonth() - start.getMonth();
-
-  const years = Math.floor(months / 12);
-  const remainingMonths = months % 12;
+  const diffTime = Math.abs(end.getTime() - start.getTime());
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  
+  // Approximate months (average 30.44 days per month)
+  const totalMonths = diffDays / 30.44;
+  const years = Math.floor(totalMonths / 12);
+  const remainingMonths = Math.round(totalMonths % 12);
 
   if (years === 0) {
     return `${remainingMonths} month${remainingMonths !== 1 ? "s" : ""}`;
@@ -39,36 +41,36 @@ function formatDateRange(start: Date, end?: Date): string {
 
 const EXPERIENCES: ExperienceItem[] = [
   {
-    dates: formatDateRange(new Date(2024, 1, 1)), // Feb 2024 - today
+    dates: formatDateRange(new Date("2024-02-01")), // Feb 2024 - today
     title: "ServiceNow Technical Consultant",
     company: "UX4MATION",
     companyLink: "https://www.linkedin.com/company/ux4mation/",
     location: "Morocco · Hybrid",
     description:
       "Design and implement custom ServiceNow workflows, scalable applications, and seamless integrations to improve operational efficiency and customer/employee experiences. Key areas: ServiceNow Administration, ITSM, CSM, and Application Development.",
-    startDate: new Date(2024, 1, 1),
+    startDate: new Date("2024-02-01"),
   },
   {
-    dates: formatDateRange(new Date(2022, 8, 1), new Date(2024, 2, 31)), // Sept 2022 - Mar 2024
+    dates: formatDateRange(new Date("2022-09-01"), new Date("2024-03-31")), // Sept 2022 - Mar 2024
     title: "Web & Mobile Developer Apprentice",
     company: "YouCode Maroc",
     companyLink: "https://www.linkedin.com/company/youcode-maroc/",
     location: "Youssoufia, Marrakech-Safi · On-site",
     description:
       "Full-stack and mobile development training with hands-on projects. Worked with Scrum methodology, focused on frontend/backend integration, responsive UI design, and collaborative development practices.",
-    startDate: new Date(2022, 8, 1),
-    endDate: new Date(2024, 2, 31),
+    startDate: new Date("2022-09-01"),
+    endDate: new Date("2024-03-31"),
   },
   {
-    dates: formatDateRange(new Date(2023, 4, 1), new Date(2023, 5, 30)), // May 2023 - Jun 2023
+    dates: formatDateRange(new Date("2023-05-01"), new Date("2023-06-30")), // May 2023 - Jun 2023
     title: "Full Stack Developer",
     company: "FOODEALS",
     companyLink: "https://www.linkedin.com/company/foodeals/",
     location: "Fès, Fès-Meknès · On-site",
     description:
       "Contributed to a web application reducing food waste by connecting restaurants and supermarkets with citizens. Implemented features across the full stack, improved user experience, and collaborated with the team on product development.",
-    startDate: new Date(2023, 4, 1),
-    endDate: new Date(2023, 5, 30),
+    startDate: new Date("2023-05-01"),
+    endDate: new Date("2023-06-30"),
   },
 ];
 

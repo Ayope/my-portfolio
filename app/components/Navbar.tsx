@@ -81,13 +81,13 @@ export default function Navbar() {
   return (
     <nav
       ref={navRef}
-      className={`sticky top-0 z-50 transition-colors duration-300 ${
+      className={`sticky top-0 z-50 transition-colors duration-300 w-full overflow-hidden ${
         isScrolled
           ? "md:bg-[#0e0e11]/95 md:shadow-md md:backdrop-blur-sm bg-[#0e0e11] shadow-md"
           : "md:bg-transparent bg-[#0e0e11] md:shadow-none shadow-none"
       }`}
     >
-      <div className="w-full py-5 px-4 md:px-10 flex justify-end items-center">
+      <div className="w-full max-w-full py-5 px-4 md:px-10 flex justify-end items-center">
 
         {/* Desktop menu */}
         <ul className="hidden md:flex gap-8 text-sm">
