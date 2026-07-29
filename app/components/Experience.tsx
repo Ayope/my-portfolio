@@ -13,13 +13,15 @@ type ExperienceItem = {
 
 // Helper: calculate duration between two dates
 function calculateDuration(start: Date, end: Date = new Date()): string {
-  const diffTime = Math.abs(end.getTime() - start.getTime());
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  
-  // Approximate months (average 30.44 days per month)
-  const totalMonths = diffDays / 30.44;
-  const years = Math.floor(totalMonths / 12);
-  const remainingMonths = Math.round(totalMonths % 12);
+  const startDate = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+  const endDate = new Date(end.getFullYear(), end.getMonth(), end.getDate());
+  const diffTime = Math.abs(endDate.getTime() - startDate.getTime());
+  const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+
+  // Approximate months using a 30.44-day month and round to the nearest month.
+  const roundedMonths = Math.round(diffDays / 30.44);
+  const years = Math.floor(roundedMonths / 12);
+  const remainingMonths = roundedMonths % 12;
 
   if (years === 0) {
     return `${remainingMonths} month${remainingMonths !== 1 ? "s" : ""}`;
